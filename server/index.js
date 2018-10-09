@@ -1,37 +1,47 @@
 import express from 'express';
-import morgan from 'morgan';
-import { join } from 'path';
+import logger from 'morgan';
 import mongoose from 'mongoose';
-import { json, urlencoded } from 'body-parser';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 import { DB, APP_PORT } from './config';
-import todoRoutes from './routes';
+import routes from './routes/index';
+
+const port = APP_PORT || 4000
 
 const app = express();
 
 // Connect to database
 mongoose.connect(DB, { useNewUrlParser: true });
-
-// Sends static files  from the public path directory
-app.use(express.static(join(__dirname, '/public')))
+mongoose.set('useCreateIndex', true);
 
 // Use morgan to log request in dev mode
-app.use(morgan('dev'))
+app.use(logger('dev'))
 
-app.use(json())
+// Parse incoming requests data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
-app.use(urlencoded({ extended: true }))
+routes(app);
 
-//  Use routes defined in Route.js and prefix it with api
-app.use('/api', todoRoutes)
+// Setup a default catch-all route that sends back a welcome message
+app.get('/', (req, res) => res.status(200)
+  .send({
+    message: 'Welcome to the TODO API'
+  }));
 
-// returns 404 for unknown routes
-app.all('/api*', (req, res) => {
-  res.status(404).send('The api route you requested does not exist');
+app.use('*', (req, res) =>
+  res.send({
+    message: 'The API route you requested does not exist'
+  }));
+
+app.listen(port, () => {
+  // eslint-disable-next-line
+  console.log(`App running on port ${port}`);
 });
 
-let port = APP_PORT || 4000
-
-app.listen(port) // Listen on port defined in config file
-
-console.log('App listening on port ' + port)
+export default app;

@@ -1,14 +1,9 @@
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
-const TodoModel = new Schema({
-  name: {
-    type: String
-  },
-
-  done: {
-    type: Boolean
-  }
+const todoSchema = new mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  title: { type: String },
+  done: { type: Boolean }
 });
 
-export default mongoose.model('Todos', TodoModel);
+export default mongoose.model('Todo', todoSchema);
