@@ -4,8 +4,8 @@ import { join } from 'path';
 import mongoose from 'mongoose';
 import { json, urlencoded } from 'body-parser';
 
-import { DB, APP_PORT } from './app/config';
-import todoRoutes from './app/Routes';
+import { DB, APP_PORT } from './config';
+import todoRoutes from './routes';
 
 const app = express();
 
@@ -25,10 +25,10 @@ app.use(urlencoded({ extended: true }))
 //  Use routes defined in Route.js and prefix it with api
 app.use('/api', todoRoutes)
 
-// Server index.html page when request to the root is made
-app.get('/', (req, res, next) => {
-  res.sendfile('./public/index.html')
-})
+// returns 404 for unknown routes
+app.all('/api*', (req, res) => {
+  res.status(404).send('The api route you requested does not exist');
+});
 
 let port = APP_PORT || 4000
 

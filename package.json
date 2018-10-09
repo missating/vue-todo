@@ -4,7 +4,7 @@
   "description": "A simple todo application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "nodemon --exec babel-node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "nodemon": "^1.18.4"
   }
