@@ -4,7 +4,7 @@ import User from '../model/User'
 export default class todoController {
   static createTodo(req, res) {
     Todo.create({
-      user: '5bbd17153d2d7e016fe62a56',
+      user: req.userId,
       title: req.body.title,
       done: false
     }).then((newTodo) => {
@@ -37,7 +37,7 @@ export default class todoController {
             }
           });
       }
-      Todo.find({ user: '5bbd17153d2d7e016fe62a56' }).then((allUserTodo) => {
+      Todo.find({ user: req.userId }).then((allUserTodo) => {
         res.status(200).json({
           data: {
             Todos: allUserTodo

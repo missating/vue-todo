@@ -73,6 +73,7 @@ export default class usersController {
         .json({
           data: {
             user: {
+              id: foundUser._id,
               name: foundUser.name,
               email: foundUser.email,
             },
