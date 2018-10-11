@@ -3,6 +3,9 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
+
 
 dotenv.config();
 
@@ -13,6 +16,9 @@ const port = APP_PORT || 4000
 
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:8000'
+}));
 
 // Connect to database
 mongoose.connect(DB, { useNewUrlParser: true });
