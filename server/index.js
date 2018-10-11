@@ -13,6 +13,7 @@ const port = APP_PORT || 4000
 
 const app = express();
 
+
 // Connect to database
 mongoose.connect(DB, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);

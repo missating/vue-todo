@@ -12,6 +12,7 @@ const isDevMode = process.env.NODE_ENV !== 'production';
 module.exports = {
   entry: {
     bundle: path.join(__dirname, '..', 'src', 'index.js'),
+    styleGlobals: path.join(__dirname, '..', 'src/assets/scss/globals.scss')
   },
   output: {
     path: path.join(__dirname, '..', 'dist'),

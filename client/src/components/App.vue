@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <h1>Welcome to my Todo app </h1>
+  <div class="container-fluid">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'app'
-  }
+export default {
+  name: "app"
+};
 </script>
+
+<style lang="scss" scoped>
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+</style>
