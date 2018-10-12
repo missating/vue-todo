@@ -6,7 +6,6 @@ export default class todoController {
     Todo.create({
       user: req.userId,
       title: req.body.title,
-      done: req.body.done
     }).then((newTodo) => {
       res.status(201).json({
         data: {
