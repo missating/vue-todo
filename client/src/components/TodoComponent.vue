@@ -1,6 +1,5 @@
 <template>
     <div class="todo-container">
-      <div>
         <h2>Create a Todo List</h2>
         <form @submit.prevent>
           <div class="form-group">
@@ -8,9 +7,8 @@
             <span class="help-block small text-center" v-show="typing">Hit enter to save</span>
           </div>
         </form>
-      </div>
       <div class="col-md-12" v-show="todos.length>0">
-          <h3>Todo Items</h3>
+          <h2 class="todo-text">Todo Items</h2>
           <div class="row mrb-10" v-for="todo in todos" :key="todo._id">
               <div class="input-group m-b-5">
                   <span class="input-group-addon addon-right">
@@ -22,11 +20,9 @@
               <span class="help-block small" v-show="todo.editing">Hit enter to update</span>
           </div>
       </div>
-      <div class="row alert alert-info text-center" v-show="todos.length==0">
-          <p class="alert alert-info">
-            <strong>All Caught Up</strong>
-          <br/>
-          You do not have any todo items</p>
+      <div class="row alert alert-info" v-show="todos.length==0">
+        <br>
+          <h4 class="alert alert-info">Wohoo! You currently do not have any Todo Item</h4>
       </div>
     </div>
 </template>
@@ -136,6 +132,42 @@ export default {
 
 <style lang="scss" scoped>
 .todo-container {
-  color: #000;
+  width: 800px;
+  height: 500px;
+  border: 2px solid #000;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 12% auto;
+  padding-top: 4px;
+  overflow: scroll;
+}
+
+.form-control {
+  width: 250px;
+  height: 30px;
+  padding: 3px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.todo-text {
+  text-align: center;
+}
+
+.todo__done {
+  text-decoration: line-through;
+}
+
+.mrb-10 {
+  margin-bottom: 10px;
+}
+
+.addon-left {
+  cursor: pointer;
+}
+
+.addon-right {
+  cursor: pointer;
 }
 </style>
