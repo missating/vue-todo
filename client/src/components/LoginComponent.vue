@@ -14,6 +14,7 @@
       <button type="submit" class="btn btn-dark" @click="submit()">Submit</button>
     </form>
   </div>
+    <h4 class="login-link">Don't have an account ? <router-link to="/">Sign up</router-link></h4>
 </div>
 </template>
 
@@ -37,6 +38,7 @@ export default {
       .then(response => {
         console.log("=======", response);
         localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem('user', response.data.data.user.name);
         this.$router.push("/todo");
         this.clearForm();
       })
@@ -59,6 +61,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 250px;
+  flex-direction: column;
 }
 
 .form-container {
@@ -68,5 +71,9 @@ export default {
   height: 250px;
   padding: 15px;
   border-radius: 2%;
+}
+
+.login-link {
+  margin-top: 20px;
 }
 </style>

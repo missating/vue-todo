@@ -5,11 +5,9 @@
 </template>
 
 <script>
+import Nav from "./NavbarComponent";
 export default {
-  name: "app"
+  name: "app",
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../../../node_modules/bootstrap/scss/bootstrap";
-</style>

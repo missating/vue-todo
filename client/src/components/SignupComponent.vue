@@ -45,6 +45,7 @@ export default {
         .then(response => {
           console.log("=======", response);
           localStorage.setItem("token", response.data.data.token);
+          localStorage.setItem('user', response.data.data.user.name);
           this.$router.push("/todo");
           this.clearForm();
         })

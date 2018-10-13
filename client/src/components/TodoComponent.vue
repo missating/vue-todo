@@ -1,34 +1,38 @@
 <template>
-    <div class="todo-container">
-        <h2>Create a Todo List</h2>
-        <form @submit.prevent>
-          <div class="form-group">
-            <input type="text" class="form-control" @keypress="typing=true" placeholder="What do you want to do?" v-model="title" @keyup.enter="addTodo()">
-            <span class="help-block small text-center" v-show="typing">Hit enter to save</span>
-          </div>
-        </form>
-      <div class="col-md-12" v-show="todos.length>0">
-          <h2 class="todo-text">Todo Items</h2>
-          <div class="row mrb-10" v-for="todo in todos" :key="todo._id">
-              <div class="input-group m-b-5">
-                  <span class="input-group-addon addon-right">
-                    <input type="checkbox" v-model="todo.done" :checked="todo.done" :value="todo.done" v-on:change="updateTodo(todo)" title="Mark as done?"/>
-                  </span>
-                  <input type="text" class="form-control" :class="todo.done?'todo__done':''" v-model="todo.title" @keypress="todo.editing=true" @keyup.enter="updateTodo(todo)">
-                  <span class="input-group-addon addon-left" title="Delete todo?" @click="deleteTodo(todo._id)">X</span>
-              </div>
-              <span class="help-block small" v-show="todo.editing">Hit enter to update</span>
-          </div>
-      </div>
-      <div class="row alert alert-info" v-show="todos.length==0">
-        <br>
-          <h4 class="alert alert-info">Wohoo! You currently do not have any Todo Item</h4>
-      </div>
+  <div>
+      <NavbarComponent></NavbarComponent>
+        <div class="todo-container">
+          <h2>Create a Todo List</h2>
+          <form @submit.prevent>
+            <div class="form-group">
+              <input type="text" class="form-control" @keypress="typing=true" placeholder="What do you want to do?" v-model="title" @keyup.enter="addTodo()">
+              <span class="help-block small text-center" v-show="typing">Hit enter to save</span>
+            </div>
+          </form>
+        <div class="col-md-12" v-show="todos.length>0">
+            <h2 class="todo-text">Todo Items</h2>
+            <div class="row mrb-10" v-for="todo in todos" :key="todo._id">
+                <div class="input-group m-b-5">
+                    <span class="input-group-addon addon-right">
+                      <input type="checkbox" v-model="todo.done" :checked="todo.done" :value="todo.done" v-on:change="updateTodo(todo)" title="Mark as done?"/>
+                    </span>
+                    <input type="text" class="form-control" :class="todo.done?'todo__done':''" v-model="todo.title" @keypress="todo.editing=true" @keyup.enter="updateTodo(todo)">
+                    <span class="input-group-addon addon-left" title="Delete todo?" @click="deleteTodo(todo._id)">X</span>
+                </div>
+                <span class="help-block small" v-show="todo.editing">Hit enter to update</span>
+            </div>
+        </div>
+        <div class="row alert alert-info" v-show="todos.length==0">
+          <br>
+            <h4 class="alert alert-info">Wohoo! You currently do not have any Todo Item</h4>
+        </div>
     </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import NavbarComponent from "./NavbarComponent";
 export default {
   data() {
     return {
@@ -126,11 +130,13 @@ export default {
     clearTodo() {
       this.title = "";
     }
-  }
+  },
+  components: { NavbarComponent }
 };
 </script>
 
 <style lang="scss" scoped>
+
 .todo-container {
   width: 800px;
   height: 500px;
