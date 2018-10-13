@@ -5,8 +5,6 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-
-
 dotenv.config();
 
 import { DB, APP_PORT } from './config';

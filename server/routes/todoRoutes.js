@@ -1,10 +1,11 @@
 import authorization from '../middleware/authorization';
-
 import todo from '../controllers/todoController';
+import { verifyCreateTodo } from '../middleware/todoValidation';
+
 
 export default function todoRoutes(app) {
   // create a todo
-  app.post('/api/v1/todo/create', authorization, todo.createTodo);
+  app.post('/api/v1/todo/create', authorization, verifyCreateTodo, todo.createTodo);
 
   // get all todo
   app.get('/api/v1/todo', authorization, todo.getTodo);
