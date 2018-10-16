@@ -11,7 +11,7 @@ module.exports = merge(config, {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.resolve(__dirname, '../src/assets'),
+    contentBase: path.resolve(__dirname, '../src/assets/images'),
     publicPath: 'http://localhost:8000/',
     hot: true,
     overlay: true,
