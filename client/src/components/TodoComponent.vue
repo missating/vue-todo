@@ -60,7 +60,6 @@ export default {
         data: param
       })
         .then(response => {
-          console.log("=======", response.data.data.Todo);
           this.clearTodo();
           this.fetchTodo();
           this.typing = false;
@@ -80,7 +79,6 @@ export default {
         }
       })
         .then(response => {
-          console.log("=======", response.data.data.Todos);
           this.todos = response.data.data.Todos;
         })
         .catch(error => {
@@ -112,20 +110,44 @@ export default {
     deleteTodo(id) {
       let url = `http://localhost:4000/api/v1/todo/delete/${id}`;
       const token = localStorage.getItem("token");
-      axios({
-        method: "DELETE",
-        url,
-        headers: {
-          token
+      this.$swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          axios({
+            method: "DELETE",
+            url,
+            headers: {
+              token
+            }
+          })
+            .then(response => {
+              this.$swal({
+                position: "top-end",
+                type: "success",
+                title: response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+              });
+              this.fetchTodo();
+            })
+            .catch(error => {
+              console.log("[[[[]]]]]]]]", error);
+            });
+        } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+          this.$swal(
+            "Cancelled",
+            "Your todo is safe :)",
+            "error"
+          );
         }
-      })
-        .then(response => {
-          console.log("=======", response.data);
-          this.fetchTodo();
-        })
-        .catch(error => {
-          console.log("[[[[]]]]]]]]", error);
-        });
+      });
     },
     clearTodo() {
       this.title = "";
@@ -136,7 +158,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .todo-container {
   width: 800px;
   height: 500px;
@@ -150,7 +171,7 @@ export default {
 }
 
 .form-control {
-  width: 250px;
+  width: 300px;
   height: 30px;
   padding: 3px;
   font-size: 1rem;

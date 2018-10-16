@@ -42,7 +42,7 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: [
           isDevMode ? 'vue-style-loader' : miniCssExtract.loader,
           {

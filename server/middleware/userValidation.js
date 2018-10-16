@@ -38,8 +38,6 @@ export const verifyUserSignin = (req, res, next) => {
     errors.email = 'Email is invalid or empty';
   } else if (!password) {
     errors.password = 'Password is required';
-  } else if (!confirmPassword) {
-    errors.confirmPassword = 'Please confirm your password';
   }
 
   if (isEmpty(errors)) { return next(); }

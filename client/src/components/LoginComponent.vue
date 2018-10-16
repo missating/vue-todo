@@ -36,14 +36,19 @@ export default {
       };
       axios.post(url, param)
       .then(response => {
-        console.log("=======", response);
         localStorage.setItem("token", response.data.data.token);
         localStorage.setItem('user', response.data.data.user.name);
         this.$router.push("/todo");
         this.clearForm();
       })
       .catch(error => {
-          console.log("[[[[]]]]]]]]", error);
+          this.$swal({
+            position: 'top-end',
+            type: 'error',
+            title: error.response.data.errors.detail,
+            showConfirmButton: false,
+            timer: 1500
+            });
         });
     },
     clearForm() {

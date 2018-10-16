@@ -6,9 +6,9 @@ export const verifyCreateTodo = (req, res, next) => {
   const errors = {};
 
   if (!title) {
-    errors.name = 'Name is required';
-  } else if (name && validator.isEmpty(name.trim())) {
-    errors.name = 'Name cannot be empty';
+    errors.title = 'Name is required';
+  } else if (title && validator.isEmpty(title.trim())) {
+    errors.title = 'Name cannot be empty';
   }
 
   if (isEmpty(errors)) { return next(); }
