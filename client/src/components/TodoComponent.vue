@@ -65,7 +65,7 @@ export default {
           this.typing = false;
         })
         .catch(error => {
-          console.log("[[[[]]]]]]]]", error);
+          const message = error;
         });
     },
     fetchTodo() {
@@ -82,7 +82,7 @@ export default {
           this.todos = response.data.data.Todos;
         })
         .catch(error => {
-          console.log("[[[[]]]]]]]]", error);
+          const message = error;
         });
     },
     updateTodo(todo) {
@@ -99,12 +99,12 @@ export default {
         data: { title, done }
       })
         .then(response => {
-          console.log("=======", response.data.data.Todo);
+          const message = response.data.data.Todo;
           this.fetchTodo();
           todo.editing = false;
         })
         .catch(error => {
-          console.log("[[[[]]]]]]]]", error);
+          const message = error;
         });
     },
     deleteTodo(id) {
@@ -138,7 +138,7 @@ export default {
               this.fetchTodo();
             })
             .catch(error => {
-              console.log("[[[[]]]]]]]]", error);
+              const message = error;
             });
         } else if (result.dismiss === this.$swal.DismissReason.cancel) {
           this.$swal(
